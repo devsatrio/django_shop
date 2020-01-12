@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('produk/',include('produk.urls')),
+    path('Blog/',include('blog.urls')),
     path('',views.index,name='index')
 ]
 
