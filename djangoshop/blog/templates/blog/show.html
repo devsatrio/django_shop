@@ -1,0 +1,48 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>{{title}}</title>
+{% endblock title %}
+
+{% block content %}
+<section class="blog_area single-post-area py-80px section-margin--small">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post row">
+                    <div class="col-lg-12">
+                        <div class="feature-img">
+                            <img class="img-fluid" src="{{data_blog.gambar.url}}" width="100%">
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 blog_details">
+                        <h2>{{data_blog.judul}}</h2>
+                        {{data_blog.isi}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">Artikel Lain</h3>
+                        {% for bl in bloglain %}
+                        <div class="media post_item">
+                            <img src="{{bl.gambar.url}}" alt="post" style="max-width: 20%;">
+                            <div class="media-body">
+                                <a href="{% url 'blog:show' bl.slug %}">
+                                    <h3>{{bl.judul}}</h3>
+                                </a>
+                                <p>{{bl.tanggal}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </aside>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

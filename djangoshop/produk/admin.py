@@ -3,7 +3,8 @@ from django.contrib.auth.models import Group
 from . import models
 
 class ProductA(admin.ModelAdmin):
-    list_display = ('nama','diskon','harga')
+    readonly_fields = ['models.kategori.slug']
+    list_display = ('models.barang.nama','models.barang.diskon','models.barang.harga')
 
 myModels = [models.kategori, models.barang]
 admin.site.register(myModels)

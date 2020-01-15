@@ -1,7 +1,7 @@
 {% extends 'layout/base.html' %}
 
 {% load static %}
-
+{% load humanize %}
 
 {% block title %}
 <title>{{title}}</title>
@@ -9,76 +9,49 @@
 
 {% block content %}
 <section class="section-margin--small mb-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-3 col-lg-4 col-md-5">
-          <div class="sidebar-categories">
-            <div class="head">Kategori</div>
-            <ul class="main-categories">
-              <li class="common-filter">
-                  <ul>
-                    {% for row in data_kategori %}
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men">{{row.nama}}</label></li>
-                    {% endfor %}
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-xl-9 col-lg-8 col-md-7">
-          <!-- Start Filter Bar -->
-          <div class="filter-bar d-flex flex-wrap align-items-center">
-            <div class="sorting">
-              <select>
-                <option value="1">Default sorting</option>
-                <option value="1">Default sorting</option>
-                <option value="1">Default sorting</option>
-              </select>
-            </div>
-            <div class="sorting mr-auto">
-              <select>
-                <option value="1">Show 12</option>
-                <option value="1">Show 12</option>
-                <option value="1">Show 12</option>
-              </select>
-            </div>
-            <div>
-              <div class="input-group filter-bar-search">
-                <input type="text" placeholder="Search">
-                <div class="input-group-append">
-                  <button type="button"><i class="ti-search"></i></button>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 col-lg-8 col-md-7">
+        <h3>{{head}}</h3>
+        <section class="lattest-product-area pb-40 category-list">
+          <div class="row">
+            {% for rows in data_barang %}
+            <div class="col-md-6 col-lg-4">
+              <div class="card text-center card-product">
+                <div class="card-product__img">
+                  <img src="{{ rows.gambar.url}}" alt="{{ post.title }}" class="card-img">
+                  <ul class="card-product__imgOverlay">
+                    <li><a href="{% url 'produk:show' rows.id %}"><button class="text-white"><i class="ti-eye"></i>
+                          Detail</button></a></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <p>{{rows.kategori.nama}}</p>
+                  <h4 class="card-product__title"><a href="{% url 'produk:show' rows.id %}">{{rows.nama}}</a></h4>
+                  <p class="card-product__price">Rp. {{rows.harga|intcomma}}</p>
                 </div>
               </div>
             </div>
+            {% endfor %}
           </div>
-          <!-- End Filter Bar -->
-          <!-- Start Best Seller -->
-          <section class="lattest-product-area pb-40 category-list">
-            <div class="row">
-                {% for rows in data_barang %}
-              <div class="col-md-6 col-lg-4">
-                <div class="card text-center card-product">
-                  <div class="card-product__img">
-                    <img src="{{ rows.gambar.url}}" alt="{{ post.title }}" class="card-img">
-                    <ul class="card-product__imgOverlay">
-                      <li><button><i class="ti-search"></i></button></li>
-                      <li><button><i class="ti-shopping-cart"></i></button></li>
-                      <li><button><i class="ti-heart"></i></button></li>
-                    </ul>
-                  </div>
-                  <div class="card-body">
-                    <p>Accessories</p>
-                    <h4 class="card-product__title"><a href="#">{{rows.nama}}</a></h4>
-                    <p class="card-product__price">{{rows.harga}}</p>
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </section>
-          <!-- End Best Seller -->
+        </section>
+      </div>
+      <div class="col-xl-3 col-lg-4 col-md-5">
+        <div class="sidebar-categories">
+          <div class="head">Kategori</div>
+          <ul class="main-categories">
+            <li class="common-filter">
+              <ul>
+                {% for row in data_kategori %}
+                <li class="filter-list"><a href="{% url 'produk:category' row.slug %}"><label
+                      for="men">{{row.nama}}</label></a></li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 {% endblock content %}

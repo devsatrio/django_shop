@@ -12,6 +12,7 @@ class BookResource(resources.ModelResource):
 
 class BookAdmin(ImportExportModelAdmin):
     resource_class = BookResource
-    list_display = ['nama','tanggal']
+    list_display = ['nama','slug','tanggal']
+    readonly_fields = ['slug']
 
 admin.site.register(models.category,BookAdmin)

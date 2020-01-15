@@ -1,0 +1,41 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+<title>{{title}}</title>
+{% endblock title %}
+{{% block content %}
+<section class="section-margin--small mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12">
+        <h3>Kategori : {{kategori.nama}}</h3>
+<section class="lattest-product-area pb-40 category-list">
+  <div class="row">
+    {% for rows in data_barang %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card text-center card-product">
+        <div class="card-product__img">
+          <img src="{{ rows.gambar.url}}" alt="{{ post.title }}" class="card-img">
+          <ul class="card-product__imgOverlay">
+            <li><a href="{% url 'produk:show' rows.id %}"><button class="text-white"><i class="ti-eye"></i>
+                  Detail</button></a></li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <p>{{rows.kategori.nama}}</p>
+          <h4 class="card-product__title"><a href="{% url 'produk:show' rows.id %}">{{rows.nama}}</a></h4>
+          <p class="card-product__price">Rp. {{rows.harga|intcomma}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+</div>
+</div>
+</div>
+</section>
+{% endblock content %}

@@ -4,7 +4,7 @@ from kategori_artikel.models import category
 
 class artikel(models.Model):
     judul = models.CharField(max_length=50)
-    isi = models.TextField(max_length=500)
+    isi = models.TextField(max_length=1000)
     tanggal = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     slug = models.SlugField(editable=False,blank=True,null=True)
     kategori = models.ForeignKey(category,on_delete=models.SET_NULL, blank=True, null=True)

@@ -2,13 +2,53 @@
 
 {% load static %}
 
-
 {% block title %}
 <title>{{title}}</title>
 {% endblock title %}
 
 {% block content %}
-<div class="text-center">
-    <h1>{{head}}</h1>
-</div>
+<br>
+<section class="blog_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog_left_sidebar">
+                    {% for rows in data_blog %}
+                    <article class="row blog_item">
+                       
+                        <div class="col-md-12">
+                            <div class="blog_post">
+                                <img src="{{rows.gambar.url}}" alt="" width="100%">
+                                <div class="blog_details">
+                                    <a href="single-blog.html">
+                                        <h2>{{rows.judul}}</h2>
+                                    </a>
+                                    <p>{{rows.isi}}</p>
+                                    <a class="button button-blog" href="{% url 'blog:show' rows.slug %}">View More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">Kategori</h4>
+                        <ul class="list cat-list">
+                            {% for row in data_kategori %}
+                            <li>
+                                <a href="{% url 'blog:kategori' row.slug %}" class="d-flex justify-content-between">
+                                    <p>{{row.nama}}</p>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock content %}
